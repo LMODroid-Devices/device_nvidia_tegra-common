@@ -18,7 +18,7 @@ LOCAL_STATIC_ANDROID_LIBRARIES := \
     androidx.preference_preference \
 
 LOCAL_STATIC_JAVA_LIBRARIES := \
-    org.lineageos.platform.internal \
+    VendorSupport-preference \
     vendor.nvidia.hardware.graphics.display-V1.0-java
 
 LOCAL_RESOURCE_DIR := \

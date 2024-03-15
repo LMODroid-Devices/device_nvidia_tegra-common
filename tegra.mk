@@ -29,7 +29,7 @@ TARGET_TEGRA_HEALTH ?= common
 TARGET_TEGRA_POWER  ?= aosp
 
 # Enable nvidia framework enhancements if available
--include vendor/lineage/product/nvidia.mk
+-include vendor/lmodroid/product/nvidia.mk
 
 # Properties
 include device/nvidia/tegra-common/properties.mk
