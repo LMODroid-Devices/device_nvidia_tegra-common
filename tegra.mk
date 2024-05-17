@@ -172,16 +172,30 @@ PRODUCT_GMS_CLIENTID_BASE ?= android-nvidia
 
 # Graphics
 ifeq ($(TARGET_TEGRA_GPU),drm)
+PRODUCT_SOONG_NAMESPACES += external/mesa3d
 PRODUCT_PACKAGES += \
+    android.hardware.graphics.allocator@4.0-service.minigbm \
+    android.hardware.graphics.mapper@4.0-impl.minigbm \
+    android.hardware.graphics.composer@2.4-service \
     hwcomposer.drm \
-    gralloc.gbm \
+    gralloc.minigbm \
     libGLES_mesa
 else ifeq ($(TARGET_TEGRA_GPU),swiftshader)
+PRODUCT_REQUIRES_INSECURE_EXECMEM_FOR_SWIFTSHADER := true
 PRODUCT_PACKAGES += \
-    libEGL_swiftshader \
-    libGLESv1_CM_swiftshader \
-    libGLESv2_swiftshader \
-    libyuv
+    android.hardware.graphics.allocator@4.0-service.minigbm \
+    android.hardware.graphics.mapper@4.0-impl.minigbm \
+    android.hardware.graphics.composer@2.4-service \
+    hwcomposer.drm_minigbm \
+    gralloc.minigbm \
+    vulkan.pastel \
+    libEGL_angle \
+    libGLESv1_CM_angle \
+    libGLESv2_angle
+PRODUCT_COPY_FILES += \
+    frameworks/native/data/etc/android.hardware.vulkan.level-0.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.vulkan.level.xml \
+    frameworks/native/data/etc/android.hardware.vulkan.version-1_0_3.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.vulkan.version.xml \
+    frameworks/native/data/etc/android.software.vulkan.deqp.level-2020-03-01.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.software.vulkan.deqp.level.xml
 endif
 
 # Health HAL
@@ -195,7 +209,7 @@ endif
 
 # Kernel
 ifneq ($(TARGET_PREBUILT_KERNEL),)
-ifeq ($(LINEAGE_BUILD),)
+ifeq ($(LMODROID_BUILD),)
 PRODUCT_COPY_FILES += \
     $(TARGET_PREBUILT_KERNEL):kernel
 endif

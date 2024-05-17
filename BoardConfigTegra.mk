@@ -49,11 +49,12 @@ DEVICE_MANIFEST_FILE += device/nvidia/tegra-common/manifests/android.hardware.dr
 
 # Graphics
 ifeq ($(TARGET_TEGRA_GPU),drm)
-BOARD_GPU_DRIVERS         ?= nouveau
+BOARD_GPU_DRIVERS         ?= nouveau tegra
 BOARD_USES_DRM_HWCOMPOSER := true
 DEVICE_MANIFEST_FILE      += device/nvidia/tegra-common/manifests/drm.xml
 TARGET_USES_HWC2          := true
 else ifeq ($(TARGET_TEGRA_GPU),swiftshader)
+DEVICE_MANIFEST_FILE      += device/nvidia/tegra-common/manifests/drm.xml
 TARGET_USES_HWC2          := true
 endif
 

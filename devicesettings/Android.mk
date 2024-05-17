@@ -1,6 +1,6 @@
 LOCAL_PATH:= $(call my-dir)
 
-ifneq ($(LINEAGE_BUILD),)
+ifneq ($(LMODROID_BUILD),)
 
 include $(CLEAR_VARS)
 
