@@ -1,6 +1,6 @@
 LOCAL_PATH:= $(call my-dir)
 
-ifneq ($(LINEAGE_BUILD),)
+ifneq ($(LMODROID_BUILD),)
 
 include $(CLEAR_VARS)
 
@@ -18,7 +18,7 @@ LOCAL_STATIC_ANDROID_LIBRARIES := \
     androidx.preference_preference \
 
 LOCAL_STATIC_JAVA_LIBRARIES := \
-    org.lineageos.platform.internal \
+    framework-lmodroid.static \
     vendor.nvidia.hardware.graphics.display-V1.0-java
 
 LOCAL_RESOURCE_DIR := \
