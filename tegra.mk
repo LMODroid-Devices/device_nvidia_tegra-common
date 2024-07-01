@@ -30,7 +30,7 @@ TARGET_TEGRA_POWER    ?= aosp
 
 ifeq ($(TARGET_TEGRA_MAN_LVL),)
 ifeq ($(TARGET_TEGRA_KERNEL),4.9)
-TARGET_TEGRA_MAN_LVL := 4
+TARGET_TEGRA_MAN_LVL := 5
 else ifeq ($(TARGET_TEGRA_KERNEL),5.10)
 TARGET_TEGRA_MAN_LVL := 6
 else ifeq ($(TARGET_TEGRA_KERNEL),5.15)
@@ -183,6 +183,10 @@ PRODUCT_PACKAGES += \
 PRODUCT_GMS_CLIENTID_BASE ?= android-nvidia
 
 # Graphics
+ifneq ($(TARGET_TEGRA_GPU),)
+PRODUCT_PACKAGES += \
+    disable_configstore
+endif
 ifeq ($(TARGET_TEGRA_GPU),drm)
 PRODUCT_SOONG_NAMESPACES += external/mesa3d
 PRODUCT_PACKAGES += \
@@ -212,23 +216,13 @@ endif
 
 # Health HAL
 ifeq ($(TARGET_TEGRA_HEALTH),aosp)
-ifeq ($(shell expr $(TARGET_TEGRA_MAN_LVL) \>= 7), 1)
 PRODUCT_PACKAGES += \
     android.hardware.health-service.example \
     android.hardware.health-service.example_recovery
-else
-PRODUCT_PACKAGES += \
-    android.hardware.health@2.0-service.tegra
-endif
 else ifeq ($(TARGET_TEGRA_HEALTH),nobattery)
-ifeq ($(shell expr $(TARGET_TEGRA_MAN_LVL) \>= 7), 1)
 PRODUCT_PACKAGES += \
     android.hardware.health-service.tegra_nobatt \
     android.hardware.health-service.tegra_nobatt_recovery
-else
-PRODUCT_PACKAGES += \
-    android.hardware.health@2.0-service.tegra_nobatt
-endif
 endif
 
 # Kernel
@@ -264,8 +258,7 @@ endif
 # OMX
 ifeq ($(TARGET_TEGRA_OMX),software)
 PRODUCT_PROPERTY_OVERRIDES += \
-    debug.stagefright.c2-poolmask=0x80000 \
-    debug.stagefright.ccodec=0
+    debug.stagefright.c2-poolmask=0x80000
 endif
 
 # PHS
