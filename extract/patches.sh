@@ -17,7 +17,7 @@ function fetch_bcm4356_patchfile() {
   echo -n "Fetching bcm4356 patchfile for btlinux from winterheart...";
 
   mkdir -p ${LINEAGE_ROOT}/${OUTDIR}/common/external/bcm_firmware/bcm4356
-  wget -q 'https://github.com/winterheart/broadcom-bt-firmware/raw/ddb24edc5169d064af3f405d6307aa4661a2cc52/brcm/BCM4356A2-13d3-3488.hcd' -O ${LINEAGE_ROOT}/${OUTDIR}/common/external/bcm_firmware/bcm4356/BCM4356A2-13d3-3488.hcd
+  wget -q 'https://github.com/winterheart/broadcom-bt-firmware/raw/ddb24edc5169d064af3f405d6307aa4661a2cc52/brcm/BCM4356A2-13d3-3488.hcd' -O $(realpath ${LINEAGE_ROOT}/${OUTDIR}/common/external/bcm_firmware/bcm4356/BCM4356A2-13d3-3488.hcd)
 
   echo "";
 }
@@ -79,7 +79,7 @@ function patch_tegrasign_v3() {
 # Tegraflash attempts to call dtbcheck in the current working directory
 # Patch it to read from the same directory tegraflash is running from
 function patch_tegraflash_dtbcheck() {
-  patch --no-backup-if-mismatch -d ${LINEAGE_ROOT}/${OUTDIR}/common -p1 < ${LINEAGE_ROOT}/device/nvidia/tegra-common/extract/tegraflash-dtbcheck.patch
+  patch --no-backup-if-mismatch -d ${LINEAGE_ROOT}/${OUTDIR}/common -p1 1>/dev/null 2>&1 < ${LINEAGE_ROOT}/device/nvidia/tegra-common/extract/tegraflash-dtbcheck.patch
 }
 
 function fetch_l4t_deps() {
@@ -124,8 +124,15 @@ function patch_nvpmodel() {
 
 # Some bootloader images need to be converted to BMP3
 function convert_bmp() {
-  if [ "$(identify -format \"%m\" ${1})" != "\"BMP3\"" ]; then
-    convert ${1} BMP3:${1};
+  # Thanks im7, for changing the established calling conventions
+  CONVERT="convert";
+  IDENTIFY="identify";
+  if type magick &>/dev/null; then
+    CONVERT="magick";
+    IDENTIFY="magick identify";
+  fi;
+  if [ "$(${IDENTIFY} -format \"%m\" ${1})" != "\"BMP3\"" ]; then
+    ${CONVERT} ${1} BMP3:${1};
   fi;
 }
 function convert_bmps() {
