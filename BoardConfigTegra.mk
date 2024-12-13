@@ -88,6 +88,11 @@ ifeq ($(TARGET_TEGRA_OMX),software)
 DEVICE_MANIFEST_FILE += device/nvidia/tegra-common/manifests/omx.xml
 endif
 
+# Sensors
+ifneq ($(TARGET_TEGRA_SENSORS),)
+DEVICE_MANIFEST_FILE += device/nvidia/tegra-common/manifests/sensors.xml
+endif
+
 # Wifi
 ifneq ($(TARGET_TEGRA_WIFI),)
 # rtl8822ce driver works with bcm userspace

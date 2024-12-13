@@ -181,7 +181,8 @@ function fetch_sources() {
                 tar -xf ${ESPATH}/nv_tegra/nvidia_drivers.tbz2 -C ${ESPATH}/drivers 1>/dev/null 2>&1;
             elif [ "${type}" == "blob" ]; then
                 # Only extract blob
-                unzip -d ${ESPATH} ${TMPDIR}/downloads/${sname}.zip blob 1>/dev/null 2>&1;
+                unzip -d ${ESPATH} ${TMPDIR}/downloads/${sname}.zip blob 1>/dev/null 2>&1 || \
+		(unzip -d ${ESPATH} ${TMPDIR}/downloads/${sname}.zip nvota.bin 1>/dev/null 2>&1 && mv ${ESPATH}/nvota.bin ${ESPATH}/blob);
             else
                 unzip -d ${ESPATH} ${TMPDIR}/downloads/${sname}.zip 1>/dev/null 2>&1;
 
