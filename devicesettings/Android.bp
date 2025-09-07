@@ -38,8 +38,8 @@ android_app {
         "androidx.preference_preference",
         "androidx.appcompat_appcompat",
         "androidx.legacy_legacy-preference-v14",
-        "org.lineageos.settings.resources",
-        "org.lineageos.platform.internal",
+        "com.libremobileos.settings.resources",
+        "framework-lmodroid.static",
         "vendor.nvidia.hardware.graphics.display-V1.0-java",
     ],
 }

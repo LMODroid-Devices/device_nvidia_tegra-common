@@ -47,7 +47,7 @@ TARGET_TEGRA_PHS ?= $(TARGET_TEGRA_DEFAULT_BRANCH)
 endif
 
 # Enable nvidia framework enhancements if available
--include vendor/lineage/product/nvidia.mk
+-include vendor/lmodroid/product/nvidia.mk
 
 # Properties
 include device/nvidia/tegra-common/properties.mk
@@ -257,7 +257,7 @@ endif
 
 # Kernel
 ifneq ($(TARGET_PREBUILT_KERNEL),)
-ifeq ($(LINEAGE_BUILD),)
+ifeq ($(LMODROID_BUILD),)
 PRODUCT_COPY_FILES += \
     $(TARGET_PREBUILT_KERNEL):kernel
 endif
