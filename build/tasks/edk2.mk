@@ -18,7 +18,7 @@ ifneq ($(TARGET_TEGRA_EDK2),)
 TARGET_KERNEL_CLANG_PATH ?= $(BUILD_TOP)/prebuilts/clang/host/$(HOST_PREBUILT_TAG)/$(LLVM_PREBUILTS_VERSION)
 
 BUILD_TOOLS_PATH   := $(BUILD_TOP)/prebuilts/build-tools/$(HOST_PREBUILT_TAG)
-LINEAGE_TOOLS_PATH := $(BUILD_TOP)/prebuilts/tools-lineage/$(HOST_PREBUILT_TAG)
+LINEAGE_TOOLS_PATH := $(BUILD_TOP)/prebuilts/tools-lmodroid/$(HOST_PREBUILT_TAG)
 TOS_PATH       	   := $(BUILD_TOP)/device/nvidia/tegra-common/tos
 SCRIPTS_PATH       := $(BUILD_TOP)/device/nvidia/tegra-common/flash_package
 
