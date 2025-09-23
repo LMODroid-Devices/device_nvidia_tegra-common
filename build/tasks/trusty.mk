@@ -18,7 +18,7 @@ CLANG_TOOLS_PATH ?= $(BUILD_TOP)/prebuilts/clang-tools/$(HOST_PREBUILT_TAG)
 TARGET_KERNEL_RUST_VERSION ?= 1.73.0c
 RUST_PATH ?= $(BUILD_TOP)/prebuilts/rust/$(HOST_PREBUILT_TAG)/$(TARGET_KERNEL_RUST_VERSION)
 BUILD_TOOLS_PATH ?= $(BUILD_TOP)/prebuilts/build-tools/$(HOST_PREBUILT_TAG)
-NPROC := $(shell prebuilts/tools-lmodroid/$(HOST_PREBUILT_TAG)/bin/nproc --all)
+NPROC := $(shell prebuilts/tools-lineage/$(HOST_PREBUILT_TAG)/bin/nproc --all)
 LKROOT ?= $(BUILD_TOP)/external/trusty/lk
 include $(BUILD_TOP)/trusty/vendor/google/aosp/lk_inc_aosp.mk
 LKINC += trusty/hardware/nvidia
